@@ -1,0 +1,7 @@
+{
+  "cards": [
+    { "heading": "Card 1", "body": "Body 1", "status": "Status 1" },
+    { "heading": "Card 2", "body": "Body 2", "status": "Status 2" }
+  ]
+}
+

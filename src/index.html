@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knockout Drag and Drop</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+
+<div class="board" data-bind="foreach: columns">
+    <div class="column" data-bind="sortable: { template: 'card-template', data: cards, connectClass: 'connectedSortable' }">
+
+    </div>
+</div>
+
+<script src="lib/knockout-latest.js"></script>
+<script type="module" src="viewModel.js"></script>
+
+</body>
+</html>

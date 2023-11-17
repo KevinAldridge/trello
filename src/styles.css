@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.column {
+    background-color: #f0f8ff; /* AliceBlue */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+    background-color: #ffffff; /* White */
+    border: 1px solid #cccccc; /* LightGray */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.connectedSortable {
+    border: 2px dashed #555;
+}
+
+.card-heading {
+    font-weight: bold;
+}
+
+.card-body {
+    margin-top: 8px;
+}
+
+.card-status {
+    color: #666666; /* DimGray */
+    font-size: 0.8em;
+    margin-top: 8px;
+}
