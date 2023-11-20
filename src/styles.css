@@ -1,47 +1,52 @@
-body {
-    font-family: 'Arial', sans-serif;
+/* Reset some default styles */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
+/* Define board layout */
 .board {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    display: flex;
+    justify-content: space-between;
     padding: 20px;
 }
 
+.column-container {
+    width: 100%; /* Adjust the width as needed */
+    display: flex;
+}
+
 .column {
-    background-color: #f0f8ff; /* AliceBlue */
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f4f5f7;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-right: 1rem;
+}
+
+.select {
+    width: 100%;
+}
+
+.column h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.cards {
+    min-height: 100px;
 }
 
 .card {
-    background-color: #ffffff; /* White */
-    border: 1px solid #cccccc; /* LightGray */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 8px;
     margin-bottom: 8px;
-    padding: 10px;
     cursor: pointer;
 }
 
-.connectedSortable {
-    border: 2px dashed #555;
-}
-
-.card-heading {
-    font-weight: bold;
-}
-
-.card-body {
-    margin-top: 8px;
-}
-
-.card-status {
-    color: #666666; /* DimGray */
-    font-size: 0.8em;
-    margin-top: 8px;
+.card:hover {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }

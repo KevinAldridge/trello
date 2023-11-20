@@ -1,0 +1,33 @@
+<DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Draggable Trello Board</title>
+        <link rel="stylesheet" href="./styles.css">
+    <script defer src="bundle.js"></script></head>
+    <body>
+
+
+    <div class="board">
+        <!-- ko foreach: columns -->
+        <div class="column" data-bind="sortable: { data: cards, connectClass: 'connectedSortable' }">
+            <h2 data-bind="text: columnTitle"></h2>
+            <!-- ko foreach: cards -->
+            <div class="card">
+                <div class="card-heading" data-bind="text: heading"></div>
+                <div class="card-body" data-bind="text: body"></div>
+                <div class="card-status" data-bind="text: status"></div>
+            </div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <script src="lib/knockout-latest.js"></script>
+<!--    <script src="./node_modules/knockout-sortable/build/knockout-sortable.js"></script>-->
+<!---->
+
+    </body>
+    </html>
+</DOCTYPE>

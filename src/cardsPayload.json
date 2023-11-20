@@ -1,0 +1,8 @@
+{
+  "cards": [
+    { "heading": "Task 1", "body": "Description 1", "status": "ToDo" },
+    { "heading": "Task 2", "body": "Description 2", "status": "InProgress" },
+    { "heading": "Task 3", "body": "Description 3", "status": "Testing" },
+    { "heading": "Task 4", "body": "Description 4", "status": "Done" }
+  ]
+}

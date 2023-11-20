@@ -1,5 +1,3 @@
-import ko from 'knockout';
-
 class Card {
     constructor(heading, body, status) {
         this.heading = ko.observable(heading);
@@ -9,32 +7,90 @@ class Card {
 }
 
 class Column {
-    constructor(cards) {
-        this.cards = ko.observableArray(cards.map(card => new Card(card.heading, card.body, card.status)));
+    constructor(title, status) {
+        this.title = ko.observable(title);
+        this.status = ko.observable(status); // Status value for filtering cards
+        this.cards = ko.observableArray([]);
     }
 }
 
 class BoardViewModel {
     constructor() {
+
+        this.moveCard = (data, event) => {
+            const selectedStatus = event.target.value;
+            const card = data;
+
+            // Find the corresponding column for the selected status
+            const column = this.columns().find(col => col.status() === selectedStatus);
+
+            if (column) {
+                // Remove the card from the current column
+                const currentColumn = this.columns().find(col => col.status() === card.status());
+                if (currentColumn) {
+                    currentColumn.cards.remove(card);
+                }
+
+                // Update the card's status to the selected status
+                card.status(selectedStatus);
+
+                // Add the card to the new column
+                column.cards.push(card);
+            }
+        };
+
+        this.deleteCard = (column, card) => {
+            column.cards.remove(card);
+            this.cards.remove(card);
+        };
+
+        this.addNewCard = () => {
+            const newHeading = prompt('Enter card heading:');
+            const newBody = prompt('Enter card body:');
+
+            if (newHeading && newBody) {
+                const newCard = new Card(newHeading, newBody, 'ToDo');
+                const toDoColumn = this.columns().find(col => col.status() === 'ToDo');
+
+                if (toDoColumn) {
+                    toDoColumn.cards.push(newCard);
+                    this.cards.push(newCard);
+                } else {
+                    alert('To Do column not found!');
+                }
+            } else {
+                alert('Please provide both heading and body for the new card.');
+            }
+        };
+
         this.columns = ko.observableArray([
-            new Column([
-                { heading: 'Card 1', body: 'Body 1', status: 'Status 1' },
-                { heading: 'Card 2', body: 'Body 2', status: 'Status 2' }
-            ]),
-            new Column([
-                { heading: 'Card 3', body: 'Body 3', status: 'Status 3' },
-                { heading: 'Card 4', body: 'Body 4', status: 'Status 4' }
-            ]),
-            new Column([
-                { heading: 'Card 5', body: 'Body 5', status: 'Status 5' },
-                { heading: 'Card 6', body: 'Body 6', status: 'Status 6' }
-            ]),
-            new Column([
-                { heading: 'Card 7', body: 'Body 7', status: 'Status 7' },
-                { heading: 'Card 8', body: 'Body 8', status: 'Status 8' }
-            ])
+            new Column("To Do", "ToDo"),
+            new Column("In Progress", "InProgress"),
+            new Column("Testing", "Testing"),
+            new Column("Done", "Done")
         ]);
+
+
+
+        this.columnTitles =  ["ToDo", "InProgress", "Testing", "Done"];
+
+
+        this.cards = ko.observableArray([this.cardsPayload.cards]); // Store all cards
+        this.cards.push(new Card("First Card", "First Card Body", "ToDo"));
+        this.cards.push(new Card("Second Card", "Second Card Body", "ToDo"));
+        this.cards.push(new Card("Third Card", "Third Card Body", "InProgress"));
+        this.cards.push(new Card("Fourth Card", "Fourth Card Body", "InProgress"));
+        this.cards.push(new Card("Fifth Card", "Fifth Card Body", "Testing"));
+        this.cards.push(new Card("Sixth Card", "Sixth Card Body", "Testing"));
+        this.cards.push(new Card("Seventh Card", "Seventh Card Body", "Done"));
+        this.cards.push(new Card("Eighth Card", "Eighth Card Body", "Done"));
+    }
+    getCardsForColumn(column) {
+        return this.cards().filter(card => card.status() === column.status());
     }
 }
 
-ko.applyBindings(new BoardViewModel());
+document.addEventListener("DOMContentLoaded", function() {
+    const viewModel = new BoardViewModel();
+    ko.applyBindings(viewModel);
+});

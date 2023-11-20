@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knockout Drag and Drop</title>
-    <link rel="stylesheet" href="./styles.css">
-</head>
-<body>
+<!--meals.html-->
+<script type="text/javascript" src="../lib/knockout-latest.js"></script>
+<script type="text/javascript" src="viewModel.js"></script>
+<link rel="stylesheet" href="styles.css">
 
 <div class="board" data-bind="foreach: columns">
-    <div class="column" data-bind="sortable: { template: 'card-template', data: cards, connectClass: 'connectedSortable' }">
-
+    <div class="column">
+        <h2 data-bind="text: title"></h2>
+        <div class="cards" data-bind="foreach: $parent.getCardsForColumn($data)">
+            <div class="card">
+                <div class="card-heading" data-bind="text: heading"></div>
+                <div class="card-body" data-bind="text: body"></div>
+                Status:
+                <select data-bind="value: status, event: { change: $parent.moveCard }">
+                    <option value="ToDo">ToDo</option>
+                    <option value="InProgress">InProgress</option>
+                    <option value="Testing">Testing</option>
+                    <option value="Done">Done</option>
+                </select>
+                <button data-bind="value: status, event: { click: $parent.deleteCard }">X</button>
+            </div>
+        </div>
     </div>
 </div>
+<button data-bind="value: status, event: { click: addNewCard }">Add New Card</button>
 
-<script src="lib/knockout-latest.js"></script>
-<script type="module" src="viewModel.js"></script>
+<script src="viewModel.js" type="module"></script>
 
-</body>
-</html>
